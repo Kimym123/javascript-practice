@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /* 순수 함수
+    * 함수에 동일한 인자를 주었을 때 항상 같은 값을 리턴하는 함수 + 외부의 상태를 변경하지 않는 함수(부수효과가 없다)
+    *  */
+    function add(a, b) {
+        return a + b;
+    }
+    console.log(`순수함수의 값 : ` + add(10, 5));
+
+
+    /* 순수 함수가 아닌 함수 1
+    * 동일한 인자룰 주어도 변수의 값에 따라 결과가 달라진다.
+    * 콘솔 1과 콘솔 2는 동일한 인자이지만 리턴하는 값이 다르다.
+    *  */
+    let c = 10;
+    function add2(a, b) {
+        return a + b + c;
+    }
+    console.log('순수함수가 아닌 예시1 중 콘솔1 : ',add2(10, 2)); // 콘솔1
+    c = 20;
+    console.log('순수함수가 아닌 예시1 중 콘솔2 : ', add2(10, 2)); // 콭솔2
+
+
+    /* 순수 함수가 아닌 함수 2
+    * 외부의 상태를 변경하는 함수. 부수효과가 존재한다. -> return 값 소통 이외, 어떠한 외부 상태에 영향을 미친다.
+    * add3을 실행하면 변수 c1의 값이 변한다.
+    *  */
+    let c1 = 20;
+    function add3(a, b) {
+        c1 = b;
+        return a + b;
+    }
+    console.log(`add3을 실행하기 전 변수 c1의 값 : `, c1);
+    console.log(`add3 실행함수 : `, add3(10, 2));
+    console.log(`add3을 실행하기 후 변수 c1의 값 : `, c1);
+
+
+    /* 일급 함수 */
+
+
+    /* add_maker */
+</script>
+</body>
+</html>
