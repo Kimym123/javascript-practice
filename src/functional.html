@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // users 배열
+    const users = [
+        {id: 1, name: 'ID', age: 36},
+        {id: 2, name: 'BJ', age: 32},
+        {id: 3, name: 'JM', age: 32},
+        {id: 4, name: 'PJ', age: 27},
+        {id: 5, name: 'HA', age: 25},
+        {id: 6, name: 'JE', age: 26},
+        {id: 7, name: 'JI', age: 31},
+        {id: 8, name: 'MP', age: 23}
+    ];
+
+    /* 명령어 코드들 */
+
+    // 1. 30세 이상인 users 만 필터링한다.
+    const moreThanTempUsers = [];
+    for (let i = 0; i < users.length; i++) {
+        if (users[i].age >= 30) {
+            moreThanTempUsers.push(users[i]);
+        }
+    }
+    console.log(`30세 이상인 users 만 필터링`, moreThanTempUsers);
+
+    // 2. 30세 이상인 users 의 morThanNames 를 수집한다.
+    const morThanNames = [];
+    for (let i = 0; i < moreThanTempUsers.length; i++) {
+        morThanNames.push(moreThanTempUsers[i].name);
+    }
+    console.log(`30세 이상인 users 의 이름을 수집`, morThanNames);
+
+    // 3. 30세 미만인 users 만 필터링 한다.
+    const lessThanTempUsers = [];
+    for (let i = 0; i < users.length; i++) {
+        if (users[i].age < 30) {
+            lessThanTempUsers.push(users[i]);
+        }
+    }
+    console.log(`30세 미만인 users 만 필터링`, lessThanTempUsers);
+
+    // 4. 30세 미만인 ages 의 lessThanAges 를 수집한다.
+    const lessThanAges = [];
+    for (let i = 0; i < lessThanTempUsers.length; i++) {
+        lessThanAges.push(lessThanTempUsers[i].age);
+    }
+    console.log(`30세 이상인 users 의 나이를 수집`, lessThanAges);
+
+
+    /* 함수형으로 리팩토링
+    *  중복을 제거하고, 함수형 프로그래밍의 컨셉을 유지한다.
+    *  */
+
+    // 1. _filter() 함수로 리팩토링
+    function _filter(list, predicate) { // 응용형(적용형, 고차) 함수. -> 함수를 인자로 받아서 원하는 시점에 평가를 실시하여 로직을 완료함.
+        let newList = [];
+        for (let i = 0; i < list.length; i++) {
+            if (predicate(list[i])) {
+                newList.push(list[i]);
+            }
+        }
+        return newList;
+    }
+
+    console.log(`filter 를 적용한 방식이며, 30살 이상의 객체만 필터`,
+        _filter(users, function (user) {
+            return user.age >= 30;
+        })
+    );
+
+    console.log(`filter 를 적용한 방식이며, 30살 미만의 객체만 필터`,
+        _filter(users, function (user) {
+            return user.age < 30;
+        })
+    );
+    // _filter 함수를 이용한 다른 예시. -> users 이외에 리스트도 이용 가능하다.
+    console.log(
+        _filter([1, 2, 3, 4], function (data) {
+            return data % 2;
+        }) // [1, 3]
+    );
+    console.log(
+        _filter([1, 2, 3, 4], function (data) {
+            return !(data % 2);
+        }) // [2, 4]
+    );
+
+
+    // 2. _map() 함수로 리팩토링
+    function _map(list, mapper) {
+        let newList = [];
+        for (let i = 0; i < list.length; i++) {
+            newList.push(mapper(list[i]));
+        }
+        return newList;
+    }
+
+    const over30 = _filter(users, function (data) {
+        return data.age >= 30;
+    });
+    console.log(`_map() 메서드를 사용하기 전 30살 이상만 필터`, over30);
+
+    const mapNames = _map(over30, function (data) {
+        return data.name;
+    })
+    console.log(`_map() 메서드를 사용한 후 30살 이상 사람의 이름만 수집`, mapNames);
+
+    // 한꺼번에 처리하는 코드
+    console.log(`_map 인자에 _filter 함수를 넣어서 한 번에 해결하는 코드`,
+        _map(_filter(users, function (data) {
+            return data.age >= 30;
+        }), function (data) {return data.name;})
+    );
+
+
+    const under30 = _filter(users, function (data) {
+        return data.age < 30;
+    });
+    console.log(`_map() 메서드를 사용하기 전 30살 미만만 필터`, under30);
+
+    const mapAges = _map(under30, function (data) {
+        return data.age;
+    })
+    console.log(`_map() 메서드를 사용한 후 30살 미만 사람의 나이만 수집`, mapAges);
+
+    // 한꺼번에 처리하는 코드
+    console.log(`_map 인자에 _filter 함수를 넣어서 한 번에 해결하는 코드`,
+        _map(_filter(users, function (data) {
+            return data.age < 30;
+        }), function (data) {return data.age;})
+    );
+
+</script>
+</body>
+</html>
