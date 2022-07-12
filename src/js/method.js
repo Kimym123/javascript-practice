@@ -49,3 +49,30 @@ function _map(list, mapper) {
     });
     return newList;
 }
+
+// _curry 함수.
+// function _curry(fn) {
+//     return function (a) {
+//         return function (b){
+//             return fn(a, b);
+//         }
+//     }
+// }
+
+// _curry 함수 리팩토링
+function _curry(fn) {
+    return function (a, b) {
+        return arguments.length == 2 ? fn(a, b) : function (b) {return fn(a, b);};
+    }
+}
+
+function _curryr(fn) {
+    return function (a, b) {
+        return arguments.length == 2 ? fn(a, b) : function (b) {return fn(b, a);};
+    }
+}
+
+// _get 함수 만들기
+function _get(obj, key) {
+    return obj = null ? undefined : obj[key];
+}
