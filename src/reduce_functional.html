@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/method.js"></script>
+    <script src="js/list_data.js"></script>
+</head>
+<body>
+<script>
+    // reduce 의 간단한 사용법
+    console.log(
+        _reduce([1, 2, 3], add, 10)
+    );
+
+    // memo 인자를 생략한 사용. -> 리팩토링으로 인해 생략 가능해졌다.
+    console.log(
+        _reduce([1, 2, 3], add)
+    );
+
+    console.log(
+        _reduce([1, 2, 3, 4], add)
+    );
+</script>
+</body>
+</html>

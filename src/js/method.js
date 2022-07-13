@@ -72,7 +72,42 @@ function _curryr(fn) {
     }
 }
 
+// curry 함수를 이용한 add 함수
+const add = _curry(function (a, b) {
+    return a + b;
+});
+
 // _get 함수 만들기
 function _get(obj, key) {
     return obj = null ? undefined : obj[key];
 }
+
+// _rest 함수 만들기 -> 리스트화 시켜주는 역할
+const slice = Array.prototype.slice;
+function _rest(list, num) {
+    return slice.call(list, num || 1); // num 가 없으면 1로 시작한다.
+}
+
+// _reduce 함수 만들기
+/* 기본 형태
+function _reduce(list, iterator, memo) {
+    _each(list, function (data) {
+        memo = iterator(memo, data);
+    });
+    return memo;
+}
+ */
+
+// memo 인자를 생략해도 작동될 수 있게 리팩토링
+function _reduce(list, iterator, memo) {
+    if (arguments.length == 2 ){
+        memo = list[0];
+        list = _rest(list); // array 형태가 아니여도, array 형태로 바꿔주는 코드
+    }
+    _each(list, function (data) {
+        memo = iterator(memo, data)
+    });
+    return memo;
+}
+
+// _pipe 함수 만들기 -> _reduce 를 이용하여 만들 수 있다.
