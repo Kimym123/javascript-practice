@@ -72,6 +72,10 @@ function _curryr(fn) {
     }
 }
 
+// curryr 함수를 이용한 filter와 map
+const _filterCurry = _curryr(_filter)
+const _mapCurry = _curryr(_map);
+
 // curry 함수를 이용한 add 함수
 const add = _curry(function (a, b) {
     return a + b;
@@ -79,7 +83,7 @@ const add = _curry(function (a, b) {
 
 // _get 함수 만들기
 function _get(obj, key) {
-    return obj = null ? undefined : obj[key];
+    return obj = null ? undefined : obj[key]; // 다형성을 높여줘서 에러를 처리하는 방법
 }
 
 // curryr 함수를 적용한 get 함수
@@ -129,4 +133,22 @@ function _pipe() {
 function _go(arg) {
     let fns = _rest(arguments); // 첫 번째 값을 제외해주는 코드
     return _pipe.apply(null, fns)(arg);
+}
+
+// _keys 함수 만들기 -> 객체에서 key만 추출하는 함수이며, null 이 들어와도 에러가 나지 않게 다형성을 높인 함수
+function _is_object(obj) {
+    return typeof obj == 'object' && !!obj;
+}
+
+function _keys(obj) {
+    return _is_object(obj) ? Object.keys(obj) : [];
+}
+
+// _keys 함수를 응용하여 _each 함수 리팩토링 -> key value 가 들어와도 each 할 수 있다.
+function _eachKeys(list, iterator) {
+    const keys = _keys(list);
+    for (let i = 0, len = keys.length; i < len; i++) {
+        iterator(list[keys[i]]);
+    }
+    return list;
 }

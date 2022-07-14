@@ -43,6 +43,19 @@
     }, function (users) {
         return _map(users, _getCurry('name'));
     }, console.log);
+
+    // curryr 을 사용한 filter와 map 을 사용한 리팩토링
+    _go(users, _filterCurry(function (user) {
+            return user.age >= 30;
+        }),
+        _mapCurry(_getCurry('name')),
+        console.log);
+
+    // 화살표 함수로 리팩토링
+    _go(users,
+        _filterCurry(user => user.age >= 30),
+        _mapCurry(_getCurry('name')), console.log);
+
 </script>
 </body>
 </html>
