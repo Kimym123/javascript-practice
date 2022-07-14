@@ -82,6 +82,11 @@ function _get(obj, key) {
     return obj = null ? undefined : obj[key];
 }
 
+// curryr 함수를 적용한 get 함수
+const _getCurry = _curryr(function (obj, key) {
+    return obj == null ? undefined : obj[key];
+});
+
 // _rest 함수 만들기 -> 리스트화 시켜주는 역할
 const slice = Array.prototype.slice;
 function _rest(list, num) {
@@ -110,4 +115,18 @@ function _reduce(list, iterator, memo) {
     return memo;
 }
 
-// _pipe 함수 만들기 -> _reduce 를 이용하여 만들 수 있다.
+// _pipe 함수 만들기 -> _reduce 를 이용하여 만들 수 있다. 연속적으로 함수를 실행할 때 사용한다.
+function _pipe() {
+    let fns = arguments;
+    return function (arg) {
+        return _reduce(fns, function (arg, fn) {
+            return fn(arg);
+        }, arg);
+    }
+}
+
+// _go 함수 만들기 -> pipe 함수의 일종이며, 즉시 실행되는 pipe 함수. pipe 함수에 인자를 추가한 것이다.
+function _go(arg) {
+    let fns = _rest(arguments); // 첫 번째 값을 제외해주는 코드
+    return _pipe.apply(null, fns)(arg);
+}

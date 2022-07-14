@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/method.js"></script>
+    <script src="js/list_data.js"></script>
+</head>
+<body>
+<script>
+    // pipe 함수 사용하기
+    let f1 = _pipe(
+        function (a) {
+            return a + 1;
+        },
+        function (a) {
+            return a * 2;
+        },
+        function (a) {
+            return a * a;
+        }
+    );
+
+    console.log(`pipe 함수 간단 사용법 : `, f1(1)); // 16
+
+    // go 함수 사용하기
+    _go(1, function (a) {
+            return a + 1;
+        },
+        function (a) {
+            return a * 2;
+        },
+        function (a) {
+            return a * a;
+        }, console.log); // 16
+
+
+    // users 를 go 함수를 사용하여 리팩토링
+    _go(users, function (users) {
+        return _filter(users, function (user) {
+            return user.age >= 30;
+        });
+    }, function (users) {
+        return _map(users, _getCurry('name'));
+    }, console.log);
+</script>
+</body>
+</html>

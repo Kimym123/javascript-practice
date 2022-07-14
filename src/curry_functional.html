@@ -38,10 +38,7 @@
     console.log(`get 함수를 사용하지 않은 방법 : `, user1.name);
     console.log(`get 함수를 사용한 방법 : `, _get(user1, 'name'));
 
-    // curryr 함수를 적용한 get 함수
-    const _getCurry = _curryr(function (obj, key) {
-        return obj == null ? undefined : obj[key];
-    });
+
     console.log(`get 함수에 curryr 함수를 적용한 방법 : `, _getCurry('name')(user1));
 
     // 응용
