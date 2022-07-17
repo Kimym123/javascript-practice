@@ -152,3 +152,12 @@ function _eachKeys(list, iterator) {
     }
     return list;
 }
+
+// times 함수. -> 함수를 인자로 받아서 n 번 만큼 반복하는 함수.
+const times = (f, n) => {
+    let i = -1;
+    while (++i < n) f(i);
+}
+
+// addMaker 함수. -> 함수를 인자로 받아서 함수를 리턴한다.
+const addMaker = a => b => a + b;

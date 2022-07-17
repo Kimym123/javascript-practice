@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <script src="../../js/method.js"></script>
+  </head>
+  <body>
+    <script>
+      const list = [1, 2, 3];
+      for (const a of list) {
+        console.log(a);
+      }
+
+      // arr
+      console.log("Arr -----------------");
+      const arr = [1, 2, 3];
+      for (const a of arr) {
+        console.log(a);
+      }
+
+      // set
+      console.log("Set -----------------");
+      const set = new Set([1, 2, 3]);
+      for (const a of set) {
+        console.log(a);
+      }
+
+      // map
+      console.log("Map -----------------");
+      const map = new Map([
+        ["a", 1],
+        ["b", 2],
+        ["c", 3],
+      ]);
+      for (const a of map) {
+        console.log(a);
+      }
+      console.log(`keys 관련 메소드`);
+      for (const a of map.keys()) {
+        console.log(a);
+      }
+      console.log(`values 관련 메소드`);
+      for (const a of map.values()) {
+        console.log(a);
+      }
+      console.log(`entries 관련 메소드(key와 value를 entry로 뽑아줌 : `);
+      for (const a of map.entries()) {
+        console.log(a);
+      }
+      /*
+       * 이터러블 : 이터레이터를 리턴하는 [Symbol.iterator] () 를 가진 값
+       * 이터레이터 : { value, done } 객체를 리턴하는 next () 를 가진 값
+       * 이터러블 / 이터레이터 프로토콜 : 이터러블을 for...of, 전개 연산자 등과 함께 동작하도록 하는 규약
+       * */
+    </script>
+  </body>
+</html>
