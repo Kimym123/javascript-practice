@@ -1,5 +1,5 @@
 // users 배열
-const users = [
+export const Users = [
     {id: 1, name: 'ID', age: 36},
     {id: 2, name: 'BJ', age: 32},
     {id: 3, name: 'JM', age: 32},
@@ -10,7 +10,7 @@ const users = [
     {id: 8, name: 'MP', age: 23}
 ];
 
-const products = [
+export const Products = [
     {name: '반팔티', price: 15000},
     {name: '긴팔티', price: 20000},
     {name: '핸드폰케이스', price: 15000},
