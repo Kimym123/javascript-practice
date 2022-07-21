@@ -78,11 +78,11 @@ function* generator() {
   return 100; // 순회할 때 return 값은 순회되지 않는다.
 }
 
-let iterator = generator(); // 제너레이터를 통해 이터레이터를 쉽게 만들 수 있다. & 이터레이터이자 이터러블이다.
-console.log(iterator.next());
-console.log(iterator.next());
-console.log(iterator.next());
-console.log(iterator.next());
+let generatorIterator = generator(); // 제너레이터를 통해 이터레이터를 쉽게 만들 수 있다. & 이터레이터이자 이터러블이다.
+console.log(generatorIterator.next());
+console.log(generatorIterator.next());
+console.log(generatorIterator.next());
+console.log(generatorIterator.next());
 
 for (const a of generator()) {
   // 이터레이터이자 이터러블이기 때문에 순회가 가능하다.
