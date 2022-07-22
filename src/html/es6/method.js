@@ -1,5 +1,3 @@
-import exp from "constants";
-
 export const map = (f, iterator) => {
   let res = [];
   for (const a of iterator) {
